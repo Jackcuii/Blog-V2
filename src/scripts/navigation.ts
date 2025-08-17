@@ -4,8 +4,11 @@ export class DynamicNavigation {
   private navRow1: HTMLElement | null;
   private navToggle: HTMLElement | null;
   private dynamicNavContainer: HTMLElement | null;
+  //private dynamicRestNavContainer: HTMLElement | null;
   private titleRow1: HTMLElement | null;
   private titleRow2: HTMLElement | null;
+  private displayedRowRegistry: HTMLElement[] = [];
+  private transitionPace: number; // Float, the pace of the animation in ms per row.
 
   // Configuration
   private readonly MAX_NAV_ROWS: number = 5; // K value - maximum number of nav rows (including nav-row-1)
@@ -26,13 +29,19 @@ export class DynamicNavigation {
 
   constructor() {
     // DOM elements
+
+    // nav has 2 rows, the nav row 1 is the top row, the nav row 2 can be expanded
+    // title has 2 rows. title is beneath the nav row 2.
+    // some rest rows can be added between the nav row 2 and the title row 1. This is not implemented yet.
     this.contentScroll = document.getElementById('content-scroll');
     this.navRow1 = document.getElementById('nav-row-1');
     this.navToggle = document.getElementById('nav-toggle');
     this.dynamicNavContainer = document.getElementById('dynamic-nav-container');
     this.titleRow1 = document.getElementById('title-row-1');
     this.titleRow2 = document.getElementById('title-row-2');
-
+    // the pace should be 100ms to move the height of the navRow1
+    // ms/px for performance. (1/v)
+    this.transitionPace = 100.0 / this.navRow1!.offsetHeight;
     // Initialize
     this.init();
   }
@@ -48,9 +57,10 @@ export class DynamicNavigation {
   private initializeNavRows(): void {
     this.navRows = [];
     this.titleRows = [];
-    
-    // Initialize nav rows
-    for (let i = 2; i <= this.MAX_NAV_ROWS; i++) {
+    this.displayedRowRegistry = [];
+
+    // initialize the nav rows.
+    for (let i = 1; i <= 2; i++) {
       const navRow = document.getElementById(`nav-row-${i}`);
       if (navRow) {
         this.navRows.push(navRow);
@@ -62,7 +72,10 @@ export class DynamicNavigation {
         navRow.style.opacity = '1';
       }
     }
-    
+    this.displayedRowRegistry.push(this.navRows[0]);
+
+    // TODO: implement rest rows.
+
     // Initialize title rows
     if (this.titleRow1) {
       this.titleRows.push(this.titleRow1);
@@ -70,6 +83,7 @@ export class DynamicNavigation {
       this.titleRow1.style.zIndex = '10';
       this.titleRow1.style.transition = 'transform 0.3s ease-out';
       this.titleRow1.style.transform = 'translateY(0)';
+      this.displayedRowRegistry.push(this.titleRow1);
     }
     
     if (this.titleRow2) {
@@ -78,11 +92,13 @@ export class DynamicNavigation {
       this.titleRow2.style.zIndex = '10';
       this.titleRow2.style.transition = 'transform 0.3s ease-out';
       this.titleRow2.style.transform = 'translateY(0)';
+      this.displayedRowRegistry.push(this.titleRow2);
     }
   }
 
   // Setup event listeners
   private setupEventListeners(): void {
+    // Toggle nav expansion
     if (this.navToggle) {
       this.navToggle.addEventListener('click', () => this.toggleNavExpansion());
     }
@@ -124,7 +140,90 @@ export class DynamicNavigation {
     this.updateToggleButton();
   }
 
+  
+  // Helper function, return if the row is folded.
+  // Args:
+  // row: the row to be checked;
+  private isRowFolded(row: HTMLElement): boolean {
+    // the row R[k] is folded if y(top(R[k])) < y(bottom(R[k-1]))
+    // assert y(top(R[k]))) >= y(top(R[k-1]))
+    if (row === this.displayedRowRegistry[0]) {
+      return false;
+    }
+    const rowTop = row.getBoundingClientRect().top;
+    const previousRow = this.displayedRowRegistry[this.displayedRowRegistry.indexOf(row) - 1];
+    const previousRowBottom = previousRow.getBoundingClientRect().bottom;
+
+    return rowTop < previousRowBottom;
+  }
+
+  // Helper function, expand a certain row. (you should make sure the row below is expanded)
+  // Args:
+  // row: the row to be expanded;
+  // Return the schedule time of the animation.
+  private expandRow(row: HTMLElement, baseTime: number): number {
+    if (!this.isRowFolded(row)) {
+      return 0;
+    }
+
+    const index = this.displayedRowRegistry.indexOf(row);
+    // move down all the rows below the row and itself synchronously
+    // distance = h(top(row)) - h(bottom(row-1))
+    const distance = row.getBoundingClientRect().top - this.displayedRowRegistry[index - 1].getBoundingClientRect().bottom;
+    const scheduleTime = this.transitionPace * distance;
+    for (let i = index; i < this.displayedRowRegistry.length; i++) {
+      // schedule according to the baseTime
+      setTimeout(() => {
+        this.displayedRowRegistry[i].style.transform = `translateY(-${distance}px)`;
+        this.displayedRowRegistry[i].style.transition = `transform ${scheduleTime}ms ease-out`;
+      }, baseTime);
+    }
+    return scheduleTime;
+  }
+
+  // 
+  private expandRowFromIndex(index: number): void {
+    // all the rows are expanded sequentially from R[len(R)-1] to R[index] sequentially.
+    let scheduleTime = 0;
+    for (let i = this.displayedRowRegistry.length - 1; i >= index; i--) {
+      // set delay according to the scheduleTime
+      scheduleTime += this.expandRow(this.displayedRowRegistry[i], scheduleTime); 
+    }
+  }
+
+  
+  // Helper function, to move down some elements synchronously to insert some lines.
+  // It will manipulate the displayedRowRegistry to insert some lines.
+  // all the rows below the startIndex will be expanded.
+  // Args:
+  // startIndex: the index (in the displayedRowRegistry) of the first row to be inserted;
+  // insertedRows: the rows to be inserted;
+  // insertedRowContainer: the container of the inserted rows;
+  private spareRoomAndDisplay(startIndex: number, insertedRows: HTMLElement[], insertedRowContainer: HTMLElement): void {
+    
+    
+    this.insertedRows.forEach((row) => {
+        // Three sync animations:
+        // 1. Move down the rows from the startIndex synchronously
+        // 2. update the height of the insertedRowContainer
+        // 3. display the rows
+
+        // 1. Move down the rows from the startIndex
+        for (let i = startIndex; i < this.displayedRowRegistry.length; i++) {
+          this.displayedRowRegistry[i].style.transform = `translateY(-${insertedRows.length * 100}px)`;
+        }
+        // 2. update the height of the insertedRowContainer
+        insertedRowContainer.style.height = `${insertedRows.length * 100}px`;
+        // 3. Move down the rows
+        for (let i = startIndex; i < this.displayedRowRegistry.length; i++) {
+          this.displayedRowRegistry[i].style.transform = `translateY(-${insertedRows.length * 100}px)`;
+        }
+
+    }
+  }
+
   // Expand nav rows with staggered animation
+  // When expanding nav rows, the text scroll is not affected.
   private expandNavRows(): void {
     if (!this.dynamicNavContainer) return;
     
