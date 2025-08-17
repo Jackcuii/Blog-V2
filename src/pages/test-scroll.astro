@@ -1,0 +1,171 @@
+---
+// Test page for scroll effects
+import NormalPageLayout from '../layouts/NormalPageLayout.astro';
+---
+
+<NormalPageLayout title="Dynamic Navigation Test" description="Testing the new dynamic navigation system with expandable nav rows">
+  <div slot="left-content">
+    <!-- Long content to test scrolling -->
+    <div class="space-y-8">
+      <section class="bg-white/50 backdrop-blur-sm rounded-lg p-6 shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Section 1: Dynamic Navigation System</h2>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          This page demonstrates the new dynamic navigation system with expandable nav rows. 
+          The system supports navRow2 to navRowK (where K is configurable) with smooth 
+          expand/collapse animations.
+        </p>
+        <p class="text-gray-700 leading-relaxed">
+          Click the "More" button in the top navigation bar to expand additional navigation rows. 
+          Each row will animate in from the previous row, creating a smooth cascading effect.
+        </p>
+      </section>
+
+      <section class="bg-white/50 backdrop-blur-sm rounded-lg p-6 shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Section 2: Animation Rules</h2>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          The animation follows specific rules:
+        </p>
+        <ul class="list-disc list-inside text-gray-700 leading-relaxed mb-4 space-y-2">
+          <li><strong>Expand:</strong> Row X moves out from row X-1 with staggered timing</li>
+          <li><strong>Collapse:</strong> Row X moves into row X-1 with reverse staggered timing</li>
+          <li><strong>Real-time Content Movement:</strong> Title bars and content move up simultaneously as each nav row collapses</li>
+          <li><strong>Scroll Effect:</strong> When expanded, rows move with content as you scroll</li>
+          <li><strong>Smooth Transitions:</strong> All animations use CSS transitions for fluid motion</li>
+        </ul>
+        <p class="text-gray-700 leading-relaxed">
+          The system is fully configurable - you can change the MAX_NAV_ROWS constant to add or remove navigation rows.
+        </p>
+      </section>
+
+      <section class="bg-white/50 backdrop-blur-sm rounded-lg p-6 shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Section 3: Technical Implementation</h2>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          The dynamic navigation system uses several key techniques:
+        </p>
+        <ul class="list-disc list-inside text-gray-700 leading-relaxed mb-4 space-y-2">
+          <li><strong>Container Animation:</strong> Uses max-height transitions for smooth expand/collapse</li>
+          <li><strong>Staggered Timing:</strong> Each row animates with a 100ms delay for cascading effect</li>
+          <li><strong>Transform & Opacity:</strong> Combines translateY and opacity for smooth movement</li>
+          <li><strong>Real-time Content Tracking:</strong> Title bars and content area move up as each nav row disappears</li>
+          <li><strong>State Management:</strong> Tracks expansion state and button appearance</li>
+          <li><strong>Accumulated Movement:</strong> Content moves by the total height of all collapsed rows</li>
+        </ul>
+        <p class="text-gray-700 leading-relaxed">
+          The scroll behavior is only active when navigation is expanded, ensuring optimal performance.
+        </p>
+      </section>
+
+      <section class="bg-white/50 backdrop-blur-sm rounded-lg p-6 shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Section 4: User Experience Features</h2>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          The dynamic navigation provides several UX benefits:
+        </p>
+        <ul class="list-disc list-inside text-gray-700 leading-relaxed mb-4 space-y-2">
+          <li><strong>Space Efficiency:</strong> Hides additional navigation when not needed</li>
+          <li><strong>Progressive Disclosure:</strong> Shows more options as user needs them</li>
+          <li><strong>Visual Feedback:</strong> Button icon and text change to indicate state</li>
+          <li><strong>Smooth Interactions:</strong> All animations are optimized for 60fps</li>
+        </ul>
+        <p class="text-gray-700 leading-relaxed">
+          The system maintains the original scroll behavior when expanded, providing a consistent experience.
+        </p>
+      </section>
+
+      <section class="bg-white/50 backdrop-blur-sm rounded-lg p-6 shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Section 5: Configuration Options</h2>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          The system is highly configurable through JavaScript constants:
+        </p>
+        <div class="bg-gray-100 p-4 rounded-lg mb-4">
+          <code class="text-sm text-gray-800">
+            const MAX_NAV_ROWS = 5; // Change this to add/remove nav rows<br>
+            const ANIMATION_DURATION = 500; // Adjust animation speed<br>
+            const STAGGER_DELAY = 100; // Control cascading timing
+          </code>
+        </div>
+        <p class="text-gray-700 leading-relaxed">
+          You can easily modify these values to customize the behavior for different use cases.
+        </p>
+      </section>
+
+      <section class="bg-white/50 backdrop-blur-sm rounded-lg p-6 shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Section 6: Testing Instructions</h2>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          To test the dynamic navigation system:
+        </p>
+        <ol class="list-decimal list-inside text-gray-700 leading-relaxed mb-4 space-y-2">
+          <li>Click the "More" button in the top navigation to expand additional rows</li>
+          <li>Observe the staggered animation as each row appears</li>
+          <li>Scroll down to see the scroll behavior with expanded navigation</li>
+          <li>Click "Less" to collapse the navigation with reverse animation</li>
+          <li>Test the responsive behavior on different screen sizes</li>
+        </ol>
+        <p class="text-gray-700 leading-relaxed">
+          The system should provide smooth, intuitive interactions in all scenarios.
+        </p>
+      </section>
+
+      <section class="bg-white/50 backdrop-blur-sm rounded-lg p-6 shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Section 7: Additional Content</h2>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          This section contains additional content to ensure there's enough material 
+          to scroll through and test the dynamic navigation system thoroughly.
+        </p>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          As you continue scrolling with expanded navigation, you should see the 
+          navigation rows move smoothly with the content, creating an engaging 
+          and responsive user experience.
+        </p>
+        <p class="text-gray-700 leading-relaxed">
+          The combination of expandable navigation and scroll-based movement 
+          creates a modern, efficient interface that adapts to user needs.
+        </p>
+      </section>
+
+      <section class="bg-white/50 backdrop-blur-sm rounded-lg p-6 shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Section 8: Conclusion</h2>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          The dynamic navigation system successfully combines expandable UI elements 
+          with sophisticated scroll behavior to create a modern, efficient interface.
+        </p>
+        <p class="text-gray-700 leading-relaxed">
+          By implementing staggered animations and state-aware scroll effects, 
+          the system provides both functionality and visual appeal while maintaining 
+          excellent performance across different devices and screen sizes.
+        </p>
+      </section>
+    </div>
+  </div>
+
+  <div slot="right-content">
+    <div class="bg-white/30 backdrop-blur-lg rounded-lg p-6 shadow-lg">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">Dynamic Navigation Guide</h3>
+      <div class="space-y-4 text-sm text-gray-700">
+        <div class="bg-blue-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-blue-800 mb-2">Expand Navigation:</h4>
+          <p>Click "More" button to show additional nav rows</p>
+        </div>
+        <div class="bg-green-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-green-800 mb-2">Animation Effect:</h4>
+          <p>Rows appear with staggered timing from top to bottom</p>
+        </div>
+        <div class="bg-purple-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-purple-800 mb-2">Scroll Behavior:</h4>
+          <p>When expanded, rows move with content as you scroll</p>
+        </div>
+        <div class="bg-orange-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-orange-800 mb-2">Collapse Effect:</h4>
+          <p>Click "Less" to hide rows with reverse staggered animation</p>
+        </div>
+        <div class="bg-red-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-red-800 mb-2">Real-time Movement:</h4>
+          <p>Title bars and content move up as each nav row collapses</p>
+        </div>
+        <div class="bg-indigo-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-indigo-800 mb-2">Smooth Transitions:</h4>
+          <p>All elements move together creating a cohesive animation</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</NormalPageLayout>

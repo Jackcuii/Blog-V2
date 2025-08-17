@@ -1,22 +1,259 @@
 ---
-
+// About me page
+import '../styles/welcome.css';
+import NormalPageLayout from '../layouts/NormalPageLayout.astro';
+import Sidebar from '../components/Sidebar.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-        <h1>About Me</h1>
-        <h2>... and my new Astro site!</h2>
-      
-        <p>I am working through Astro's introductory tutorial. This is the second page on my website, and it's the first one I built myself!</p>
-      
-        <p>This site will update as I complete more of the tutorial, so keep checking back and see how my journey is going!</p>
-      
-	</body>
-</html>
+<NormalPageLayout title="About Me - Blog V2">
+  <!-- Left Content -->
+  <div slot="left-content">
+    <!-- Personal Story -->
+    <div class="mb-8">
+      <h2 class="text-3xl font-bold text-gray-800 mb-6">My Story</h2>
+      <div class="space-y-4 text-gray-600 leading-relaxed text-lg">
+        <p>
+          Hello! I'm John Doe, a passionate Full Stack Developer with over 5 years of experience in creating 
+          beautiful, functional, and user-friendly web applications. My journey in technology began when I 
+          built my first website at the age of 16, and since then, I've been constantly learning and evolving.
+        </p>
+        <p>
+          I believe that great software is not just about writing code, but about solving real problems 
+          and creating meaningful experiences for users. Every project I work on is an opportunity to 
+          learn something new and push the boundaries of what's possible on the web.
+        </p>
+        <p>
+          When I'm not coding, you can find me exploring new technologies, contributing to open-source 
+          projects, or sharing knowledge with the developer community through blog posts and tutorials.
+        </p>
+      </div>
+    </div>
+
+    <!-- Skills & Expertise -->
+    <div class="mb-8">
+      <h2 class="text-3xl font-bold text-gray-800 mb-6">Skills & Expertise</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Frontend Skills -->
+        <div class="space-y-4">
+          <h3 class="text-xl font-semibold text-blue-600 mb-4">Frontend Development</h3>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-700 font-medium">React</span>
+              <div class="w-32 bg-gray-200 rounded-full h-3">
+                <div class="bg-blue-500 h-3 rounded-full transition-all duration-500" style="width: 90%"></div>
+              </div>
+              <span class="text-sm text-gray-500 w-8 text-right">90%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-700 font-medium">Vue.js</span>
+              <div class="w-32 bg-gray-200 rounded-full h-3">
+                <div class="bg-green-500 h-3 rounded-full transition-all duration-500" style="width: 85%"></div>
+              </div>
+              <span class="text-sm text-gray-500 w-8 text-right">85%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-700 font-medium">TailwindCSS</span>
+              <div class="w-32 bg-gray-200 rounded-full h-3">
+                <div class="bg-purple-500 h-3 rounded-full transition-all duration-500" style="width: 95%"></div>
+              </div>
+              <span class="text-sm text-gray-500 w-8 text-right">95%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-700 font-medium">TypeScript</span>
+              <div class="w-32 bg-gray-200 rounded-full h-3">
+                <div class="bg-blue-600 h-3 rounded-full transition-all duration-500" style="width: 80%"></div>
+              </div>
+              <span class="text-sm text-gray-500 w-8 text-right">80%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Backend Skills -->
+        <div class="space-y-4">
+          <h3 class="text-xl font-semibold text-green-600 mb-4">Backend Development</h3>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-700 font-medium">Node.js</span>
+              <div class="w-32 bg-gray-200 rounded-full h-3">
+                <div class="bg-green-600 h-3 rounded-full transition-all duration-500" style="width: 88%"></div>
+              </div>
+              <span class="text-sm text-gray-500 w-8 text-right">88%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-700 font-medium">Python</span>
+              <div class="w-32 bg-gray-200 rounded-full h-3">
+                <div class="bg-yellow-500 h-3 rounded-full transition-all duration-500" style="width: 75%"></div>
+              </div>
+              <span class="text-sm text-gray-500 w-8 text-right">75%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-700 font-medium">PostgreSQL</span>
+              <div class="w-32 bg-gray-200 rounded-full h-3">
+                <div class="bg-blue-700 h-3 rounded-full transition-all duration-500" style="width: 82%"></div>
+              </div>
+              <span class="text-sm text-gray-500 w-8 text-right">82%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-700 font-medium">Docker</span>
+              <div class="w-32 bg-gray-200 rounded-full h-3">
+                <div class="bg-blue-500 h-3 rounded-full transition-all duration-500" style="width: 70%"></div>
+              </div>
+              <span class="text-sm text-gray-500 w-8 text-right">70%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Experience Timeline -->
+    <div class="mb-8">
+      <h2 class="text-3xl font-bold text-gray-800 mb-6">Experience</h2>
+      <div class="space-y-8">
+        <div class="flex items-start space-x-6">
+          <div class="w-4 h-4 bg-blue-500 rounded-full mt-3 flex-shrink-0"></div>
+          <div class="flex-1">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Senior Full Stack Developer</h3>
+            <p class="text-blue-600 text-lg mb-3">TechCorp Inc. • 2022 - Present</p>
+            <p class="text-gray-600 leading-relaxed">
+              Leading development of enterprise web applications using React, Node.js, and AWS. 
+              Mentoring junior developers and implementing best practices. Responsible for architecting 
+              scalable solutions and optimizing application performance.
+            </p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
+              <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Node.js</span>
+              <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">AWS</span>
+              <span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded">Mentoring</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex items-start space-x-6">
+          <div class="w-4 h-4 bg-green-500 rounded-full mt-3 flex-shrink-0"></div>
+          <div class="flex-1">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Frontend Developer</h3>
+            <p class="text-green-600 text-lg mb-3">WebSolutions • 2020 - 2022</p>
+            <p class="text-gray-600 leading-relaxed">
+              Built responsive user interfaces and improved user experience for multiple client projects. 
+              Collaborated with design and backend teams to deliver high-quality web applications. 
+              Implemented modern frontend frameworks and best practices.
+            </p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Vue.js</span>
+              <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">TailwindCSS</span>
+              <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">UX Design</span>
+              <span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded">Responsive</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex items-start space-x-6">
+          <div class="w-4 h-4 bg-purple-500 rounded-full mt-3 flex-shrink-0"></div>
+          <div class="flex-1">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Junior Developer</h3>
+            <p class="text-purple-600 text-lg mb-3">StartupXYZ • 2019 - 2020</p>
+            <p class="text-gray-600 leading-relaxed">
+              Started my professional journey working on various web projects. 
+              Learned modern development practices and tools. Contributed to team projects 
+              and gained hands-on experience with full-stack development.
+            </p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">JavaScript</span>
+              <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">HTML/CSS</span>
+              <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">Git</span>
+              <span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded">Agile</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education & Certifications -->
+    <div class="mb-8">
+      <h2 class="text-3xl font-bold text-gray-800 mb-6">Education & Certifications</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="space-y-4">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">Education</h3>
+          <div class="space-y-4">
+            <div class="bg-white/50 backdrop-blur-sm p-4 rounded-lg border border-gray-200">
+              <h4 class="font-semibold text-gray-800 text-lg">Bachelor of Computer Science</h4>
+              <p class="text-blue-600 font-medium">University of Technology</p>
+              <p class="text-gray-600 text-sm">2015-2019</p>
+              <p class="text-gray-600 text-sm mt-2">
+                Graduated with honors. Focused on software engineering, algorithms, and web technologies.
+              </p>
+            </div>
+            <div class="bg-white/50 backdrop-blur-sm p-4 rounded-lg border border-gray-200">
+              <h4 class="font-semibold text-gray-800 text-lg">Web Development Bootcamp</h4>
+              <p class="text-blue-600 font-medium">CodeAcademy</p>
+              <p class="text-gray-600 text-sm">2018</p>
+              <p class="text-gray-600 text-sm mt-2">
+                Intensive 12-week program covering modern web development technologies and practices.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="space-y-4">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">Certifications</h3>
+          <div class="space-y-4">
+            <div class="bg-white/50 backdrop-blur-sm p-4 rounded-lg border border-gray-200">
+              <h4 class="font-semibold text-gray-800 text-lg">AWS Certified Developer</h4>
+              <p class="text-blue-600 font-medium">Amazon Web Services</p>
+              <p class="text-gray-600 text-sm">2023</p>
+              <p class="text-gray-600 text-sm mt-2">
+                Certified in developing and maintaining applications on the AWS platform.
+              </p>
+            </div>
+            <div class="bg-white/50 backdrop-blur-sm p-4 rounded-lg border border-gray-200">
+              <h4 class="font-semibold text-gray-800 text-lg">React Developer Certification</h4>
+              <p class="text-blue-600 font-medium">Meta</p>
+              <p class="text-gray-600 text-sm">2022</p>
+              <p class="text-gray-600 text-sm mt-2">
+                Advanced React development skills and best practices certification.
+              </p>
+            </div>
+            <div class="bg-white/50 backdrop-blur-sm p-4 rounded-lg border border-gray-200">
+              <h4 class="font-semibold text-gray-800 text-lg">Docker Certified Associate</h4>
+              <p class="text-blue-600 font-medium">Docker Inc.</p>
+              <p class="text-gray-600 text-sm">2021</p>
+              <p class="text-gray-600 text-sm mt-2">
+                Containerization and orchestration expertise with Docker and Kubernetes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal Interests -->
+    <div class="mb-8">
+      <h2 class="text-3xl font-bold text-gray-800 mb-6">Personal Interests</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-gradient-to-br from-blue-400 to-blue-600 p-6 rounded-lg text-white">
+          <h3 class="text-xl font-semibold mb-3">Open Source</h3>
+          <p class="text-blue-100">
+            Active contributor to various open-source projects. Believe in giving back to the community.
+          </p>
+        </div>
+        <div class="bg-gradient-to-br from-green-400 to-green-600 p-6 rounded-lg text-white">
+          <h3 class="text-xl font-semibold mb-3">Tech Writing</h3>
+          <p class="text-green-100">
+            Regular blog posts and tutorials sharing knowledge with the developer community.
+          </p>
+        </div>
+        <div class="bg-gradient-to-br from-purple-400 to-purple-600 p-6 rounded-lg text-white">
+          <h3 class="text-xl font-semibold mb-3">Learning</h3>
+          <p class="text-purple-100">
+            Always exploring new technologies and staying up-to-date with industry trends.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Content -->
+  <div slot="right-content">
+    <Sidebar />
+  </div>
+</NormalPageLayout>

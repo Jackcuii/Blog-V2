@@ -1,16 +1,180 @@
 ---
-
+// Astro page component
+import '../styles/welcome.css';
+import MainLayout from '../layouts/MainLayout.astro';
+import Sidebar from '../components/Sidebar.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout title="Blog V2">
+  <!-- Left Content -->
+  <div slot="left-content">
+    <!-- Content Group A (Default) -->
+    <div id="content-a" class="content-group">
+      <!-- Header/Title Section -->
+      <header class="text-left py-8">
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">
+          Welcome to My Blog
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600">
+          A place where I share my thoughts, experiences, and insights about technology and life.
+        </p>
+      </header>
+
+      <!-- Featured Post -->
+      <article class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+        <div class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium inline-block mb-4">
+          Featured
+        </div>
+        <h2 class="text-2xl font-bold text-gray-800 mb-3">
+          Getting Started with Astro
+        </h2>
+        <p class="text-gray-600 mb-4">
+          Learn how to build fast, modern websites with Astro's component-based architecture and static site generation.
+        </p>
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-500">March 15, 2024</span>
+          <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors duration-200">
+            Read More
+          </button>
+        </div>
+      </article>
+
+      <!-- Recent Posts -->
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Recent Posts</h3>
+        <div class="space-y-4">
+          <div class="border-b border-gray-200 pb-4 last:border-b-0">
+            <h4 class="font-semibold text-gray-800 mb-2">TailwindCSS Best Practices</h4>
+            <p class="text-sm text-gray-600 mb-2">Essential tips for writing clean and maintainable CSS with TailwindCSS.</p>
+            <span class="text-xs text-gray-500">March 12, 2024</span>
+          </div>
+          <div class="border-b border-gray-200 pb-4 last:border-b-0">
+            <h4 class="font-semibold text-gray-800 mb-2">Modern Web Development</h4>
+            <p class="text-sm text-gray-600 mb-2">Exploring the latest trends and tools in web development.</p>
+            <span class="text-xs text-gray-500">March 10, 2024</span>
+          </div>
+          <div class="border-b border-gray-200 pb-4 last:border-b-0">
+            <h4 class="font-semibold text-gray-800 mb-2">Performance Optimization</h4>
+            <p class="text-sm text-gray-600 mb-2">Techniques to make your websites faster and more efficient.</p>
+            <span class="text-xs text-gray-500">March 8, 2024</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Group B -->
+    <div id="content-b" class="content-group hidden">
+      <!-- Header/Title Section -->
+      <header class="text-left py-8">
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">
+          Technology Insights
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600">
+          Deep dives into cutting-edge technologies and development practices.
+        </p>
+      </header>
+
+      <!-- Featured Post -->
+      <article class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+        <div class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium inline-block mb-4">
+          Trending
+        </div>
+        <h2 class="text-2xl font-bold text-gray-800 mb-3">
+          The Future of Web Development
+        </h2>
+        <p class="text-gray-600 mb-4">
+          Exploring emerging technologies like WebAssembly, Edge Computing, and AI-powered development tools.
+        </p>
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-500">March 20, 2024</span>
+          <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors duration-200">
+            Explore
+          </button>
+        </div>
+      </article>
+
+      <!-- Technology Stack -->
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">My Tech Stack</h3>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-blue-50 p-4 rounded-lg">
+            <h4 class="font-semibold text-blue-800 mb-2">Frontend</h4>
+            <p class="text-sm text-gray-600">React, Vue, Astro, TailwindCSS</p>
+          </div>
+          <div class="bg-green-50 p-4 rounded-lg">
+            <h4 class="font-semibold text-green-800 mb-2">Backend</h4>
+            <p class="text-sm text-gray-600">Node.js, Python, PostgreSQL</p>
+          </div>
+          <div class="bg-purple-50 p-4 rounded-lg">
+            <h4 class="font-semibold text-purple-800 mb-2">DevOps</h4>
+            <p class="text-sm text-gray-600">Docker, AWS, CI/CD</p>
+          </div>
+          <div class="bg-orange-50 p-4 rounded-lg">
+            <h4 class="font-semibold text-orange-800 mb-2">Tools</h4>
+            <p class="text-sm text-gray-600">Git, VS Code, Figma</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Group C -->
+    <div id="content-c" class="content-group hidden">
+      <!-- Header/Title Section -->
+      <header class="text-left py-8">
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">
+          Creative Projects
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600">
+          Showcasing innovative projects and creative solutions to real-world problems.
+        </p>
+      </header>
+
+      <!-- Featured Project -->
+      <article class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+        <div class="bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium inline-block mb-4">
+          Project
+        </div>
+        <h2 class="text-2xl font-bold text-gray-800 mb-3">
+          AI-Powered Blog Platform
+        </h2>
+        <p class="text-gray-600 mb-4">
+          A revolutionary blogging platform that uses AI to generate content suggestions and optimize SEO automatically.
+        </p>
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-500">March 25, 2024</span>
+          <button class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg transition-colors duration-200">
+            View Demo
+          </button>
+        </div>
+      </article>
+
+      <!-- Project Gallery -->
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Project Gallery</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-gradient-to-br from-blue-400 to-blue-600 p-6 rounded-lg text-white">
+            <h4 class="font-semibold mb-2">E-commerce Platform</h4>
+            <p class="text-sm opacity-90">Full-stack e-commerce solution with payment integration</p>
+          </div>
+          <div class="bg-gradient-to-br from-green-400 to-green-600 p-6 rounded-lg text-white">
+            <h4 class="font-semibold mb-2">Task Management App</h4>
+            <p class="text-sm opacity-90">Collaborative project management with real-time updates</p>
+          </div>
+          <div class="bg-gradient-to-br from-purple-400 to-purple-600 p-6 rounded-lg text-white">
+            <h4 class="font-semibold mb-2">Weather Dashboard</h4>
+            <p class="text-sm opacity-90">Interactive weather visualization with multiple APIs</p>
+          </div>
+          <div class="bg-gradient-to-br from-orange-400 to-orange-600 p-6 rounded-lg text-white">
+            <h4 class="font-semibold mb-2">Portfolio Website</h4>
+            <p class="text-sm opacity-90">Modern portfolio with animations and dark mode</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Content -->
+  <div slot="right-content">
+    <Sidebar />
+  </div>
+</MainLayout>

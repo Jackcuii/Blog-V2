@@ -1,0 +1,164 @@
+---
+// Configuration page for dynamic navigation system
+import NormalPageLayout from '../layouts/NormalPageLayout.astro';
+---
+
+<NormalPageLayout title="Configuration Guide" description="How to configure the dynamic navigation system">
+  <div slot="left-content">
+    <div class="space-y-8">
+      <section class="bg-white/50 backdrop-blur-sm rounded-lg p-6 shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Dynamic Navigation Configuration</h2>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          The dynamic navigation system is highly configurable through JavaScript constants. 
+          Here's how to customize the behavior for your specific needs.
+        </p>
+      </section>
+
+      <section class="bg-white/50 backdrop-blur-sm rounded-lg p-6 shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Key Configuration Parameters</h2>
+        
+        <div class="space-y-6">
+          <div class="bg-blue-50 p-4 rounded-lg">
+            <h3 class="text-lg font-semibold text-blue-800 mb-2">MAX_NAV_ROWS</h3>
+            <p class="text-gray-700 mb-2">Controls the maximum number of navigation rows (including nav-row-1)</p>
+            <div class="bg-white p-3 rounded border">
+              <code class="text-sm text-gray-800">const MAX_NAV_ROWS = 5; // Change this value to add/remove nav rows</code>
+            </div>
+            <p class="text-sm text-gray-600 mt-2">Current value: 5 (supports nav-row-2 through nav-row-5)</p>
+          </div>
+
+          <div class="bg-green-50 p-4 rounded-lg">
+            <h3 class="text-lg font-semibold text-green-800 mb-2">ANIMATION_DURATION</h3>
+            <p class="text-gray-700 mb-2">Controls the duration of expand/collapse animations in milliseconds</p>
+            <div class="bg-white p-3 rounded border">
+              <code class="text-sm text-gray-800">const ANIMATION_DURATION = 500; // Adjust for faster/slower animations</code>
+            </div>
+            <p class="text-sm text-gray-600 mt-2">Current value: 500ms</p>
+          </div>
+
+          <div class="bg-purple-50 p-4 rounded-lg">
+            <h3 class="text-lg font-semibold text-purple-800 mb-2">STAGGER_DELAY</h3>
+            <p class="text-gray-700 mb-2">Controls the delay between each row's animation (implicit in code)</p>
+            <div class="bg-white p-3 rounded border">
+              <code class="text-sm text-gray-800">setTimeout(() => { /* animation */ }, index * 100); // 100ms delay per row</code>
+            </div>
+            <p class="text-sm text-gray-600 mt-2">Current value: 100ms per row</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white/50 backdrop-blur-sm rounded-lg p-6 shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">How to Modify Configuration</h2>
+        
+        <div class="space-y-4">
+          <div class="bg-yellow-50 p-4 rounded-lg">
+            <h3 class="text-lg font-semibold text-yellow-800 mb-2">Step 1: Locate the Configuration</h3>
+            <p class="text-gray-700">Open <code class="bg-white px-2 py-1 rounded text-sm">src/layouts/NormalPageLayout.astro</code></p>
+            <p class="text-gray-700">Find the JavaScript section at the bottom of the file</p>
+          </div>
+
+          <div class="bg-orange-50 p-4 rounded-lg">
+            <h3 class="text-lg font-semibold text-orange-800 mb-2">Step 2: Modify Constants</h3>
+            <p class="text-gray-700">Change the values of the configuration constants:</p>
+            <div class="bg-white p-3 rounded border mt-2">
+              <code class="text-sm text-gray-800">
+                // Configuration<br>
+                const MAX_NAV_ROWS = 7; // Increase to add more nav rows<br>
+                const ANIMATION_DURATION = 300; // Decrease for faster animations<br>
+                // Add more nav rows in HTML if increasing MAX_NAV_ROWS
+              </code>
+            </div>
+          </div>
+
+          <div class="bg-red-50 p-4 rounded-lg">
+            <h3 class="text-lg font-semibold text-red-800 mb-2">Step 3: Add HTML Elements</h3>
+            <p class="text-gray-700">If you increase MAX_NAV_ROWS, add corresponding HTML elements:</p>
+            <div class="bg-white p-3 rounded border mt-2">
+              <code class="text-sm text-gray-800">
+                &lt;div id="nav-row-6" class="bg-white/30 backdrop-blur-md..."&gt;<br>
+                &nbsp;&nbsp;&lt;div class="px-8 py-4 w-full"&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- Your nav row content --&gt;<br>
+                &nbsp;&nbsp;&lt;/div&gt;<br>
+                &lt;/div&gt;
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white/50 backdrop-blur-sm rounded-lg p-6 shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Example Configurations</h2>
+        
+        <div class="space-y-4">
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Minimal Navigation (3 rows)</h3>
+            <div class="bg-white p-3 rounded border">
+              <code class="text-sm text-gray-800">
+                const MAX_NAV_ROWS = 3; // Only nav-row-1, nav-row-2, nav-row-3<br>
+                const ANIMATION_DURATION = 400;
+              </code>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Extended Navigation (8 rows)</h3>
+            <div class="bg-white p-3 rounded border">
+              <code class="text-sm text-gray-800">
+                const MAX_NAV_ROWS = 8; // nav-row-1 through nav-row-8<br>
+                const ANIMATION_DURATION = 600; // Slower for more rows<br>
+                // Remember to add nav-row-6, nav-row-7, nav-row-8 in HTML
+              </code>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Fast Animation</h3>
+            <div class="bg-white p-3 rounded border">
+              <code class="text-sm text-gray-800">
+                const MAX_NAV_ROWS = 5;<br>
+                const ANIMATION_DURATION = 200; // Very fast animations<br>
+                // Modify setTimeout delays to 50ms for faster cascading
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white/50 backdrop-blur-sm rounded-lg p-6 shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Best Practices</h2>
+        
+        <ul class="list-disc list-inside text-gray-700 leading-relaxed space-y-2">
+          <li><strong>Performance:</strong> Keep MAX_NAV_ROWS under 10 for optimal performance</li>
+          <li><strong>Animation Timing:</strong> ANIMATION_DURATION should be proportional to the number of rows</li>
+          <li><strong>User Experience:</strong> Test animations on different devices to ensure smooth performance</li>
+          <li><strong>Accessibility:</strong> Ensure navigation remains accessible when expanded/collapsed</li>
+          <li><strong>Responsive Design:</strong> Consider reducing MAX_NAV_ROWS on mobile devices</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div slot="right-content">
+    <div class="bg-white/30 backdrop-blur-lg rounded-lg p-6 shadow-lg">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">Configuration Tips</h3>
+      <div class="space-y-4 text-sm text-gray-700">
+        <div class="bg-blue-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-blue-800 mb-2">Performance:</h4>
+          <p>More rows = slower animations. Balance functionality with performance.</p>
+        </div>
+        <div class="bg-green-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-green-800 mb-2">User Experience:</h4>
+          <p>Test different configurations with real users to find optimal settings.</p>
+        </div>
+        <div class="bg-purple-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-purple-800 mb-2">Mobile:</h4>
+          <p>Consider reducing MAX_NAV_ROWS on smaller screens for better UX.</p>
+        </div>
+        <div class="bg-orange-50 p-3 rounded-lg">
+          <h4 class="font-semibold text-orange-800 mb-2">Testing:</h4>
+          <p>Always test the complete animation sequence after making changes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</NormalPageLayout>

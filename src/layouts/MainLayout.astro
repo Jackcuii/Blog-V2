@@ -1,0 +1,138 @@
+---
+// MainLayout.astro
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "A place where I share my thoughts, experiences, and insights about technology and life." } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen overflow-hidden">
+    <div class="w-full h-screen">
+      <!-- Main Content Grid -->
+      <main class="grid grid-cols-1 md:grid-cols-10 gap-0 w-full h-full relative">
+        <!-- Left Column - Scrollable -->
+        <div class="md:col-span-7 h-full overflow-y-auto px-4 py-8">
+          <div class="space-y-6">
+            <slot name="left-content" />
+          </div>
+        </div>
+
+        <!-- Right Column - Fixed Background -->
+        <div class="md:col-span-3 h-full relative">
+          <!-- Fixed Background Layer -->
+          <div class="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed" style="background-image: url('/images/backgrounds/brick-wall.png');"></div>
+          
+          <!-- Content Layer - Fixed Position -->
+          <div class="absolute inset-0 z-10">
+            <div class="h-full flex flex-col">
+              <div class="flex-1 overflow-y-auto px-4 py-8">
+                <div class="space-y-6">
+                  <slot name="right-content" />
+                </div>
+              </div>
+              
+              <!-- Footer - Fixed at bottom -->
+              <div class="flex-shrink-0 px-4 pb-8">
+                <footer class="text-center pt-8 border-t border-gray-200">
+                  <p class="text-gray-600">
+                    © 2024 My Blog. Built with Astro and TailwindCSS.
+                  </p>
+                </footer>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Button K - Floating Button -->
+        <button 
+          id="toggle-button" 
+          class="fixed z-50 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110"
+          style="top: 20px; right: 20px;"
+        >
+          K
+        </button>
+      </main>
+
+      <!-- Hidden Common Area for future upgrades -->
+      <div class="hidden">
+        <slot name="common-area" />
+      </div>
+    </div>
+
+    <script>
+      // Content switching logic
+      let currentGroup = 'a';
+      const groups = ['a', 'b', 'c'];
+      
+      // Check if coming from another page
+      if (document.referrer && document.referrer.includes(window.location.origin)) {
+        // Coming from another page on the same site, show group B
+        currentGroup = 'b';
+        showGroup('b');
+      }
+
+      function showGroup(group: string) {
+        // Hide all groups
+        groups.forEach(g => {
+          const element = document.getElementById(`content-${g}`);
+          if (element) {
+            element.classList.add('hidden');
+          }
+        });
+        
+        // Show the specified group
+        const targetElement = document.getElementById(`content-${group}`);
+        if (targetElement) {
+          targetElement.classList.remove('hidden');
+        }
+      }
+
+      function nextGroup() {
+        const currentIndex = groups.indexOf(currentGroup);
+        const nextIndex = (currentIndex + 1) % groups.length;
+        currentGroup = groups[nextIndex];
+        showGroup(currentGroup);
+      }
+
+      // Button click handler
+      const toggleButton = document.getElementById('toggle-button');
+      if (toggleButton) {
+        toggleButton.addEventListener('click', nextGroup);
+      }
+
+      // Responsive button positioning
+      function updateButtonPosition() {
+        const button = document.getElementById('toggle-button');
+        if (!button) return;
+        
+        const isWideScreen = window.innerWidth >= 768; // md breakpoint
+        
+        if (isWideScreen) {
+          // Wide screen: position relative to left column
+          button.style.position = 'absolute';
+          button.style.top = '20px';
+          button.style.right = 'calc(30% + 20px)'; // Right edge of left column + margin
+        } else {
+          // Narrow screen: position in top right corner
+          button.style.position = 'fixed';
+          button.style.top = '20px';
+          button.style.right = '20px';
+        }
+      }
+
+      // Update position on load and resize
+      window.addEventListener('load', updateButtonPosition);
+      window.addEventListener('resize', updateButtonPosition);
+    </script>
+  </body>
+</html>
